@@ -11,7 +11,7 @@ from resources.store import Store,StoreList
 from db import db
 
 app = Flask(__name__) 
-uri = app.config['SQLALCHEMY_DATABASE_URI'] = os.environment('DATABASE_URL','sqlite:///data.db') #database_url is used in delopyment in heroku. for local dev we can use sqlite itself
+uri = app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db') #database_url is used in delopyment in heroku. for local dev we can use sqlite itself
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #if db object is changed it looks into it by default sqlalchemy as better modification tracker builin  
