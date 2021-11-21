@@ -1,5 +1,5 @@
 #in postman application requests are present in flask_rest_api folder
-
+import os
 from flask import Flask,request
 from flask.wrappers import Request
 from flask_restful import Resource, Api, reqparse
@@ -11,7 +11,7 @@ from resources.store import Store,StoreList
 from db import db
 
 app = Flask(__name__) 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environment('DATABASE_URL','sqlite:///data.db') #database_url is used in delopyment in heroku. for local dev we can use sqlite itself
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #if db object is changed it looks into it by default sqlalchemy as better modification tracker builin  
 app.secret_key = "nandha@30" #its an authentication
 api = Api(app) 
